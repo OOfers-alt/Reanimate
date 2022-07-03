@@ -177,7 +177,7 @@ elseif Options.Type == "Fling" then
 elseif Options.Type == "SemiBot" then
 	FlingPart = Character:FindFirstChild("Torso")
 elseif Options.Type == "Bullet" then
-	FlingPart = Character:FindFirstChild("Left Leg") or Character:FindFirstChild("LeftUpperArm")
+	FlingPart = Character:FindFirstChild("Right Arm") or Character:FindFirstChild("LeftUpperArm")
 elseif Options.Type == "Godmode" then
 	if Humanoid.RigType == Enum.HumanoidRigType.R6 then
 		FlingPart = Character:FindFirstChild("HumanoidRootPart")
@@ -277,7 +277,7 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 			BP.D = 100
 			BP.Position = FlingPart.Position
 			BP.Parent = FlingPart
-			Thrust.Force = Vector3.new(13000,13000,13000)
+			Thrust.Force = Vector3.new(1000,1000,1000)
 
 		
 			if Options.Type == "SemiBot" then
@@ -340,7 +340,7 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 	if Humanoid.RigType == Enum.HumanoidRigType.R6 and Options.R6Method ~= "CFrame" and Options.Type == "Bullet" then
 		if Character:FindFirstChild("Pal Hair") then
 			Character:FindFirstChild("Pal Hair").Handle:ClearAllChildren()
-			Align(Character:FindFirstChild("Pal Hair").Handle, Clone:FindFirstChild("Left Leg"), Vector3.new(0,0,0), Vector3.new(90,0,0))
+			Align(Character:FindFirstChild("Pal Hair").Handle, Clone:FindFirstChild("Right Arm"), Vector3.new(0,0,0), Vector3.new(90,0,0))
 		else
 			ConsoleLog("Pal Hair Not Found! (Bullet)")
 		end
@@ -509,14 +509,14 @@ table.insert(Loops, RunService.Heartbeat:Connect(function()
 
 			if Options.Type == "Bullet" then -- bullet check
 				if Character:FindFirstChild("Pal Hair") then -- hat detect
-					Character:FindFirstChild("Pal Hair").Handle.CFrame = Clone:FindFirstChild("Left Leg").CFrame * CFrame.Angles(math.rad(90),0,0)
+					Character:FindFirstChild("Pal Hair").Handle.CFrame = Clone:FindFirstChild("Right Arm").CFrame * CFrame.Angles(math.rad(90),0,0)
 				end
 
 				if Global.Disconnect == false then -- disconnectio
-					Character:FindFirstChild("Left Leg").CFrame = Clone:FindFirstChild("Left Leg").CFrame
+					Character:FindFirstChild("Right Arm").CFrame = Clone:FindFirstChild("Right Arm").CFrame
 				end
 			else -- if no bullet then 
-				Character:FindFirstChild("Left Leg").CFrame = Clone:FindFirstChild("Left Leg").CFrame
+				Character:FindFirstChild("Right Arm").CFrame = Clone:FindFirstChild("Right Arm").CFrame
 			end
 
 			Character:FindFirstChild("Left Arm").CFrame = Clone:FindFirstChild("Left Arm").CFrame
