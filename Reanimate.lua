@@ -273,15 +273,13 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 			BP = Instance.new("BodyPosition")
 			local Thrust = Instance.new("BodyThrust")
 			BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-			BP.P = 22500
-			BP.D = 125
+			BP.P = 2249999872
+			BP.D = 100
 			BP.Position = FlingPart.Position
 			BP.Parent = FlingPart
-			Thrust.Force = Vector3.new(130,130,130)
+			Thrust.Force = Vector3.new(13000,13000,13000)
 
-			if Options.Type == "Godmode" then
-				Thrust.Force = Vector3.new(150,150,150)
-			end
+		
 			if Options.Type == "SemiBot" then
 				BP.P = 31000
 				BP.D = 210
@@ -307,12 +305,10 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 				if Options.InstantBullet.SmartLock == false then
 					if OnHold then
 						if Mouse.Target ~= nil then
-							BP.Position = Mouse.Hit.p
-							Thrust.Location = Mouse.Hit.p
+					
 						end
 					else
-						BP.Position = Clone.Head.Position + Vector3.new(0,-10,0)
-						Thrust.Location = Clone.Head.Position + Vector3.new(0,-10,0)
+					
 					end
 				else -- HEREEE
 
@@ -320,21 +316,18 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 						if game.Players:GetPlayerFromCharacter(Mouse.Target.Parent) then
 							if Mouse.Target.Parent.Name ~= Players.LocalPlayer.Name then
 								if Mouse.Target ~= nil then
-									Thrust.Location = Mouse.Target.Parent:FindFirstChild("Head").CFrame.p + Vector3.new(0,-2,0)
-									BP.Position = Mouse.Target.Parent:FindFirstChild("Head").CFrame.p + Vector3.new(0,-2,0)
+									
 								end
 							end
 						elseif game.Players:GetPlayerFromCharacter(Mouse.Target.Parent.Parent) then
 							if Mouse.Target.Parent.Parent.Name ~= Players.LocalPlayer.Name then
 								if Mouse.Target ~= nil then
-									Thrust.Location = Mouse.Target.Parent.Parent:FindFirstChild("Head").CFrame.p + Vector3.new(0,-2,0)
-									BP.Position = Mouse.Target.Parent.Parent:FindFirstChild("Head").CFrame.p + Vector3.new(0,-2,0)
+								
 								end
 							end
 						end
 					else
-						BP.Position = Clone.Head.Position + Vector3.new(0,-10,0)
-						Thrust.Location = Clone.Head.Position + Vector3.new(0,-10,0)
+				
 					end -- end the smart flign thing
 				end -- end of the onhold statement
 			end)
