@@ -1,4 +1,8 @@
 
+--[[
+	When Forking/Modifying the reanimate please credit the me!
+	We would appreciate it since this reanimate took me 8+ hours to code!
+]]
 local Global = (getgenv and getgenv()) or _G
 if not Global.Options then Global.Options = {
 		["Jitteryness"] = Vector3.new(30.5, 0, 0), -- Velocity
@@ -37,30 +41,30 @@ local function Align(Part0, Part1, Position, Orientation)
 	AlignPosition.Parent = Part0
 	AlignPosition.MaxForce = 13e9
 	AlignPosition.Responsiveness = 200
-	AlignPosition.Name = "NAP1"
+	AlignPosition.Name = "AP1"
 
 	local AlignOrientation = Instance.new("AlignOrientation")
 	AlignOrientation.Parent = Part0
 	AlignOrientation.MaxTorque = 13e9
 	AlignOrientation.Responsiveness = 200
-	AlignOrientation.Name = "NAO"
+	AlignOrientation.Name = "AO"
 
 	local Attachment1 = Instance.new("Attachment")
 	Attachment1.Parent = Part0
 	Attachment1.Position = Position or Vector3.new(0,0,0)
 	Attachment1.Orientation = Orientation or Vector3.new(0,0,0)
-	Attachment1.Name = "NAtt1"
+	Attachment1.Name = "Att1"
 
 	local Attachment2 = Instance.new("Attachment")
 	Attachment2.Parent = Part1
-	Attachment2.Name = "NAtt2"
+	Attachment2.Name = "Att2"
 
 	AlignPosition.Attachment0 = Attachment1
 	AlignPosition.Attachment1 = Attachment2
 
 	local AlignPosition2 = Instance.new("AlignPosition")
 	AlignPosition2.Parent = Part0
-	AlignPosition2.Name = "NAP2"
+	AlignPosition2.Name = "AP2"
 
 	if Options.R6Method == "AlignMax" or Options.R15Method == "AlignMax" then
 		AlignPosition2.RigidityEnabled = true
@@ -78,15 +82,15 @@ end
 
 local function ConsoleLog(Text)
 	if Options.Logging == true then
-		warn("[N Reanimation] "..Text)
+		warn("[Reanimation] "..Text)
 	end
 end
 
 local Storage = game:GetService("ReplicatedStorage")
 
-if not Storage:FindFirstChild("NPreloadData") then
+if not Storage:FindFirstChild("PreloadData") then
 	local Folder = Instance.new("Folder", Storage)
-	Folder.Name = "NPreloadData"
+	Folder.Name = "PreloadData"
 
 	local AudioNo = Instance.new("Sound", Folder)
 	AudioNo.Name = "False"
@@ -112,8 +116,8 @@ if not Storage:FindFirstChild("NPreloadData") then
 	ConsoleLog("Preloaded R6 Dummy (game.ReplicatedStorage.R6FakeRig)")
 end
 
-local NetApi = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/StrokeThePea/NReanimate/main/src/API.lua"))()
-local Assets = Storage:FindFirstChild("NPreloadData")
+local NetApi = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Props.lua"))()
+local Assets = Storage:FindFirstChild("PreloadData")
 
 local function Notification(HappyOrNo, First, Second)
 	task.spawn(function()
@@ -130,7 +134,7 @@ local function Notification(HappyOrNo, First, Second)
 	})
 end
 
-if workspace:FindFirstChild("NReanim") then
+if workspace:FindFirstChild("Reanim") then
 	Notification(false, "Reanimate", "Already Reanimated. Reset to Unreanimate.")
 	return
 end
@@ -208,7 +212,7 @@ for Index, Accessory in pairs(CharacterG) do
 end
 
 local Clone = Assets:FindFirstChild("R6FakeRig"):Clone()
-Clone.Name = "NReanim"
+Clone.Name = "Reanim"
 Clone.Parent = workspace
 Clone.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
 
@@ -257,9 +261,9 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 			if Options.Type ~= "SemiBot" then
 				FlingPart:ClearAllChildren()
 			else
-				FlingPart.NAP1:Destroy()
-				FlingPart.NAP2:Destroy()
-				FlingPart.NAO:Destroy()
+				FlingPart.AP1:Destroy()
+				FlingPart.AP2:Destroy()
+				FlingPart.AO:Destroy()
 			end
 			local HighLight = Instance.new("SelectionBox")
 			HighLight.Adornee = FlingPart
@@ -706,8 +710,8 @@ ConsoleLog("Everything is loaded!")
 
 
 if Options.LoadLibrary == true then
-	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/StrokeThePea/NReanimate/main/src/LoadLibrary.lua"))()
+	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/LoadLibrary.lua"))()
 end
 if Options.RigAnimations == true then
-	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/StrokeThePea/NReanimate/main/src/Animations.lua"))()
+	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Animate.lua"))()
 end
