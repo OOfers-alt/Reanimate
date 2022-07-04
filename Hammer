@@ -86,7 +86,7 @@ game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].B
 
  pcall(function()
 	maybe.Handle.CFrame = clone.Handle.CFrame
-	maybe.Handle.Velocity = Vector3.new(0, 0, 0)
+	maybe.Handle.Velocity = Vector3.new(1, 0, 0)
 end)
     
  
