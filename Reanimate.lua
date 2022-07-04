@@ -377,9 +377,9 @@ table.insert(Loops, RunService.Stepped:Connect(function()
 
 	CloneHumanoid:Move(Humanoid.MoveDirection, false)
 	if Options.BonusProperties == true then
-	  
+	  if NetApi ~= nil then
 		NetApi.Net()
-	
+    	end
 	end
 	for Index, Track in pairs(HumanoidTracks) do
 		Track:Stop()
