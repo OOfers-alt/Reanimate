@@ -1,32 +1,4 @@
-function NearestPlayer()
-	local Players = game:GetService("Players")
-	local LocalPlayer = Players.LocalPlayer
 
-	local part = LocalPlayer.Character.Head
-
-	local maxDistance = 15
-
-
-	local nearestPlayer, nearestDistance
-	for _, player in pairs(Players:GetPlayers()) do
-		if player ~= Players.LocalPlayer then
-			local character = player.Character
-			local distance = player:DistanceFromCharacter(part.Position)
-			if not character or 
-				distance > maxDistance or
-				(nearestDistance and distance >= nearestDistance)
-
-			then
-				continue
-			end
-
-			nearestDistance = distance
-			nearestPlayer = player
-		end	
-	end
-	return nearestPlayer
-end
-print(NearestPlayer())
 if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
 	Rig = "R15"
 
@@ -35,18 +7,9 @@ spawn(function()
 		game["Run Service"].Heartbeat:Connect(function()
 		   
 			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
-				if attack == false then
-					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
-				elseif attack == true then
-				     print(NearestPlayer())
-					if NearestPlayer() ~= nil then
-					   
-						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = NearestPlayer().Character.HumanoidRootPart.CFrame * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90)) * CFrame.new(math.random(1,2) / 5,math.random(1,2) / 5,math.random(1,2) / 5)
-						else 
-						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
-					end
-				end
-				--game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame * CFrame.new(0,0.2,0)
+					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0) * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
+			
 			end
 		end)
 	end)
@@ -57,18 +20,9 @@ else
 		game["Run Service"].Heartbeat:Connect(function()
 		   
 			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
-				if attack == false then
-					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
-				elseif attack == true then
-				     print(NearestPlayer())
-					if NearestPlayer() ~= nil then
-					   
-						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = NearestPlayer().Character.HumanoidRootPart.CFrame * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90)) * CFrame.new(math.random(1,2) / 5,math.random(1,2) / 5,math.random(1,2) / 5)
-						else 
-						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
-					end
-				end
-				--game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+			
+					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0) * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
+			
 			end
 		end)
 	end)
@@ -79,7 +33,7 @@ end
 
 
 getgenv().Options = {
-	["Jitteryness"] = Vector3.new(30.5,0,0), -- Velocity
+	["Jitteryness"] = Vector3.new(40,0,0), -- Velocity
 	["Jitterless"] = false, -- Very Small Jitter, Smaller Delay
 	["Type"] = "Bullet", -- Raw (Simple), Fling, Bullet, Godmode
 	["InstantBullet"] = {
@@ -166,13 +120,13 @@ if Rig == "R6" then
 	local av = Instance.new("BodyAngularVelocity")
 	av.AngularVelocity = Vector3.new(10000, 10000, 10000)
 	av.P = 999999995904
-	av.MaxTorque = Vector3.new(1e+10, 1e+11, 1e+15)
+	av.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
 	av.Parent = game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"]
 else
 	local av = Instance.new("BodyAngularVelocity")
-	av.AngularVelocity = Vector3.new(10000, 10000, 10000)
-	av.P = 999999995904
-	av.MaxTorque = Vector3.new(1e+10, 1e+11, 1e+15)
+	av.AngularVelocity = Vector3.new(999999999999999999999, 999999999999999999999, 999999999999999999999)
+	av.P = 999999999999999999999
+	av.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
 	av.Parent = game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"]
 end
 game["Run Service"].Heartbeat:Connect(function()
@@ -181,7 +135,7 @@ if Rig == "R6" then
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
 	else
-
+game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame * CFrame.new(0,0.2,0)
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position 
 	end
@@ -1267,7 +1221,7 @@ function Ban()
 		RW.C0 = clerp(RW.C0, CF(1* Player_Size, 0.3 + 0.02 * Sin(sine / 20)* Player_Size, -.6* Player_Size) * angles(Rad(5), Rad(-.6), Rad(-25)), 0.3)
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(15), Rad(-6), Rad(-25 - 4.5 * Sin(sine / 20))), 0.3)
 	end
-	near = NearestPlayer()
+
 
 	attack = false
 end
@@ -1304,7 +1258,6 @@ function BigBan()
 		LW.C0 = clerp(LW.C0, CF(-1* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, -.6* Player_Size) * angles(Rad(-325), Rad(-6), Rad(45)), 0.2)
 	end
 	Weld.C0 = CFrame.Angles(Rad(-86),0,0)
-	near = NearestPlayer()
 
 	attack = false
 end
@@ -1345,7 +1298,7 @@ function BANN()
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(15), Rad(-6), Rad(-25 - 4.5 * Sin(sine / 20))), 0.3)
 	end
 	M2.Scale = Vector3.new(1, 1, 1)
-	near = NearestPlayer()
+
 
 	attack = false
 end
