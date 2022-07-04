@@ -1,3 +1,82 @@
+function NearestPlayer()
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+
+	local part = LocalPlayer.Character.Head
+
+	local maxDistance = 15
+
+
+	local nearestPlayer, nearestDistance
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= Players.LocalPlayer then
+			local character = player.Character
+			local distance = player:DistanceFromCharacter(part.Position)
+			if not character or 
+				distance > maxDistance or
+				(nearestDistance and distance >= nearestDistance)
+
+			then
+				continue
+			end
+
+			nearestDistance = distance
+			nearestPlayer = player
+		end	
+	end
+	return nearestPlayer
+end
+print(NearestPlayer())
+if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+	Rig = "R15"
+
+spawn(function()
+	    
+		game["Run Service"].Heartbeat:Connect(function()
+		   
+			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
+				if attack == false then
+					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
+				elseif attack == true then
+				     print(NearestPlayer())
+					if NearestPlayer() ~= nil then
+					   
+						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = NearestPlayer().Character.HumanoidRootPart.CFrame * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90)) * CFrame.new(math.random(1,2) / 5,math.random(1,2) / 5,math.random(1,2) / 5)
+						else 
+						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
+					end
+				end
+				--game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+			end
+		end)
+	end)
+else
+
+	spawn(function()
+	    
+		game["Run Service"].Heartbeat:Connect(function()
+		   
+			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
+				if attack == false then
+					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
+				elseif attack == true then
+				     print(NearestPlayer())
+					if NearestPlayer() ~= nil then
+					   
+						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = NearestPlayer().Character.HumanoidRootPart.CFrame * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90)) * CFrame.new(math.random(1,2) / 5,math.random(1,2) / 5,math.random(1,2) / 5)
+						else 
+						game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0)
+					end
+				end
+				--game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+			end
+		end)
+	end)
+	
+	Rig = "R6"
+	
+end
+
 
 getgenv().Options = {
 	["Jitteryness"] = Vector3.new(30.5,0,0), -- Velocity
@@ -7,7 +86,7 @@ getgenv().Options = {
 		["Bool"] = true, -- Enables it
 		["SmartLock"] = true -- Locks Bullet On Head On Hold; Disables "Bullet Follow Pointer" Thingy on hold.
 	}, -- Type has to be Bullet/Godmode
-	["R15Method"] = "Align", -- Align,AlignMax Or CFrame
+	["R15Method"] = "AlignMax", -- Align,AlignMax Or CFrame
 	["R6Method"] = "AlignMax", -- Align,AlignMax Or CFrame
 	["BonusProperties"] = true, -- Net, and other stuff.
 	["RigAnimations"] = true, -- Enables Default Animate
@@ -15,7 +94,7 @@ getgenv().Options = {
 	["Logging"] = false -- Enables logging (prints debug information in console)
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Reanimate.lua"))()
-wait(.5)
+wait()
 game.Players.LocalPlayer.Character["MARTILLO"].Handle.AccessoryWeld:Remove()
 
 -----------------------
@@ -79,17 +158,40 @@ local RHCF = CFrame.fromEulerAnglesXYZ(0, 1.6, 0)
 local LHCF = CFrame.fromEulerAnglesXYZ(0, -1.6, 0)
 local maincolor = BrickColor.new("Instwitutional white")
 local cool = maybe
+local hitting = false
+local Players = game:GetService("Players")
+local found = false
+wait(0.5)
+if Rig == "R6" then
+	local av = Instance.new("BodyAngularVelocity")
+	av.AngularVelocity = Vector3.new(10000, 10000, 10000)
+	av.P = 999999995904
+	av.MaxTorque = Vector3.new(1e+10, 1e+11, 1e+15)
+	av.Parent = game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"]
+else
+	local av = Instance.new("BodyAngularVelocity")
+	av.AngularVelocity = Vector3.new(10000, 10000, 10000)
+	av.P = 999999995904
+	av.MaxTorque = Vector3.new(1e+10, 1e+11, 1e+15)
+	av.Parent = game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"]
+end
 game["Run Service"].Heartbeat:Connect(function()
 
-    game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
-game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+if Rig == "R6" then
+		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+	else
 
- pcall(function()
-	maybe.Handle.CFrame = clone.Handle.CFrame
-	maybe.Handle.Velocity = Vector3.new(1, 0, 0)
-end)
-    
- 
+		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position 
+	end
+	pcall(function()
+		maybe.Handle.CFrame = clone.Handle.CFrame
+		maybe.Handle.Velocity = Vector3.new(1, 0, 0)
+	end)
+
+
+
 
 
 end)
@@ -343,7 +445,7 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 			Parent = h,
 		}
 		game:GetService("Debris"):AddItem(c, .5)
-	
+
 		local Damage = math.random(minim, maxim)
 		local blocked = false
 		local block = hit.Parent:findFirstChild("Block")
@@ -369,11 +471,11 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 				HHumanoid.PlatformStand = false
 			end), hum)
 			local angle = (hit.Position - (Property.Position + Vector3.new(0, 0, 0))).unit
-		
+
 		elseif Type == "Normal" then
-		
+
 		elseif Type == "Up" then
-			
+
 		elseif Type == "DarkUp" then
 			coroutine.resume(coroutine.create(function()
 				for i = 0, 1, 0.1 do
@@ -381,13 +483,13 @@ function Damage(Part, hit, minim, maxim, knockback, Type, Property, Delay, HitSo
 					Effects.Block.Create(BrickColor.new("Black"), hit.Parent.Torso.CFrame, 5, 5, 5, 1, 1, 1, .08, 1)
 				end
 			end))
-		
+
 		elseif Type == "Snare" then
 
 		elseif Type == "Freeze" then
-		
-		
-		
+
+
+
 		end
 		local debounce = Create("BoolValue"){
 			Name = "DebounceHit",
@@ -843,8 +945,8 @@ end
 
 function Eviscerate(dude)
 	if dude.Name ~= char.Name and dude.Name ~= plr.Name then
-	
-	
+
+
 		local val = IT("BoolValue", dude)
 		val.Name = "IsHit"
 		local ds = coroutine.wrap(function()
@@ -854,7 +956,7 @@ function Eviscerate(dude)
 				for i, v in pairs(dude:GetChildren()) do
 					if v:IsA("Part") or v:IsA("MeshPart") then
 						coroutine.resume(coroutine.create(function()
-						
+
 						end))
 					end
 				end
@@ -921,7 +1023,7 @@ end
 
 function SoulSteal(dude)
 	if dude.Name ~= char.Name and dude.Name ~= plr.Name then
-		
+
 		local val = IT("BoolValue", dude)
 		val.Name = "IsHit"
 		local torso = (dude:FindFirstChild'Head' or dude:FindFirstChild'Torso' or dude:FindFirstChild'UpperTorso' or dude:FindFirstChild'LowerTorso' or dude:FindFirstChild'HumanoidRootPart')
@@ -932,8 +1034,8 @@ function SoulSteal(dude)
 			soul.Anchored = false
 			soul.Position = torso.Position
 			soul.Transparency = 1
-			
-			
+
+
 			wait(1.6)
 			soul.Touched:connect(function(hit)
 				if hit.Parent == char then
@@ -943,7 +1045,7 @@ function SoulSteal(dude)
 			wait(1.2)
 			while soul do
 				swait()
-		
+
 			end
 		end)
 		soulst()
@@ -1135,6 +1237,7 @@ tecks2.Parent = naeeym2]]
 -------------------------------------------------------
 function Ban()
 	attack = true
+	
 	for i = 0, 2.6, 0.1 do
 		swait()
 		rootj.C0 = clerp(rootj.C0, RootCF * CF(0* Player_Size, 0* Player_Size, -0.1 + 0.1* Player_Size * Cos(sine / 20)) * angles(Rad(0), Rad(0), Rad(-60)), 0.2)
@@ -1145,6 +1248,7 @@ function Ban()
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(15), Rad(-6), Rad(-25 - 4.5 * Sin(sine / 20))), 0.2)
 	end
 	Cso("147722910", tors, 10, 1)
+	
 	CameraEnshaking(2, 15)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -6, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -6, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
@@ -1163,6 +1267,8 @@ function Ban()
 		RW.C0 = clerp(RW.C0, CF(1* Player_Size, 0.3 + 0.02 * Sin(sine / 20)* Player_Size, -.6* Player_Size) * angles(Rad(5), Rad(-.6), Rad(-25)), 0.3)
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(15), Rad(-6), Rad(-25 - 4.5 * Sin(sine / 20))), 0.3)
 	end
+	near = NearestPlayer()
+
 	attack = false
 end
 function BigBan()
@@ -1178,6 +1284,7 @@ function BigBan()
 		LW.C0 = clerp(LW.C0, CF(-1* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, -.6* Player_Size) * angles(Rad(-225), Rad(-6), Rad(45)), 0.2)
 	end
 	Cso("147722910", tors, 10, 1)
+
 	CameraEnshaking(2, 15)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -6, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -6, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
@@ -1197,6 +1304,8 @@ function BigBan()
 		LW.C0 = clerp(LW.C0, CF(-1* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, -.6* Player_Size) * angles(Rad(-325), Rad(-6), Rad(45)), 0.2)
 	end
 	Weld.C0 = CFrame.Angles(Rad(-86),0,0)
+	near = NearestPlayer()
+
 	attack = false
 end
 function BANN()
@@ -1212,6 +1321,7 @@ function BANN()
 		LW.C0 = clerp(LW.C0, CF(-.8* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, -.4* Player_Size) * angles(Rad(156), Rad(-.6), Rad(45)), 0.2)
 	end
 	Cso("147722910", char, 10, 1)
+
 	CameraEnshaking(2, 35)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -5, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -5, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
@@ -1235,6 +1345,8 @@ function BANN()
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(15), Rad(-6), Rad(-25 - 4.5 * Sin(sine / 20))), 0.3)
 	end
 	M2.Scale = Vector3.new(1, 1, 1)
+	near = NearestPlayer()
+
 	attack = false
 end
 -------------------------------------------------------
@@ -1258,12 +1370,13 @@ mouse.KeyDown:connect(function(key)
 			BigBan()
 		elseif key == 'r' then
 			BANN()
-	end
+		end
 	end
 end)
 mouse.Button1Down:connect(function(key)
 	if attack == false then
 		Ban()
+		
 	end
 end)
 
