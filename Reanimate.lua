@@ -1,4 +1,3 @@
-
 --[[
 	When Forking/Modifying the reanimate please credit the me!
 	We would appreciate it since this reanimate took me 8+ hours to code!
@@ -106,11 +105,11 @@ if not Storage:FindFirstChild("PreloadData") then
 	R6FakeRig.Name = "R6FakeRig"
 	R6FakeRig.Parent = Folder
 
-	task.wait(0.1)
+	
 
 	if syn then
 		ConsoleLog("Synapse Found! Waiting 2 Additional Seconds")
-		task.wait(2)
+		
 	end
 
 	ConsoleLog("Preloaded R6 Dummy (game.ReplicatedStorage.R6FakeRig)")
@@ -177,12 +176,12 @@ elseif Options.Type == "Fling" then
 elseif Options.Type == "SemiBot" then
 	FlingPart = Character:FindFirstChild("Torso")
 elseif Options.Type == "Bullet" then
-	FlingPart = Character:FindFirstChild("Right Arm") or Character:FindFirstChild("LeftUpperArm")
+	FlingPart = Character:FindFirstChild("Right Arm") or Character:FindFirstChild("HumanoidRootPart")
 elseif Options.Type == "Godmode" then
 	if Humanoid.RigType == Enum.HumanoidRigType.R6 then
-		FlingPart = Character:FindFirstChild("HumanoidRootPart")
+		FlingPart = Character:FindFirstChild("Right Arm")
 	elseif Humanoid.RigType == Enum.HumanoidRigType.R15 then
-		FlingPart = Character:FindFirstChild("LeftUpperArm") 
+		FlingPart = Character:FindFirstChild("HumanoidRootPart") 
 	end
 end
 Global.FlingBullet = FlingPart
@@ -231,7 +230,7 @@ end
 Global.ReanimationClone = Clone
 
 if Humanoid.RigType == Enum.HumanoidRigType.R6 and Options.Type ~= "Godmode" then
-	Character.HumanoidRootPart:Destroy()
+	--Character.HumanoidRootPart:Destroy()
 end
 
 local BP = nil
@@ -249,9 +248,9 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 	
 	task.spawn(function() 
 		if Options.Type == "Bullet" or Options.Type == "SemiBot" then 
-			task.wait(1)
+		
 		elseif Options.Type == "Godmode" then
-			task.wait(6)
+			
 		end
 		
 		if Options.InstantBullet.Bool == true then
@@ -346,9 +345,9 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 		end
 	end
 	if Humanoid.RigType == Enum.HumanoidRigType.R15 and Options.R15Method ~= "CFrame" then
-		if Character:FindFirstChild("SniperShoulderL") then
-			Character:FindFirstChild("SniperShoulderL").Handle:ClearAllChildren()
-			Align(Character:FindFirstChild("SniperShoulderL").Handle, Clone:FindFirstChild("Left Arm"), Vector3.new(0,-0.5,0), Vector3.new(0,0,0))
+		if Character:FindFirstChild("MeshPartAccessory") then
+			Character:FindFirstChild("MeshPartAccessory").Handle:ClearAllChildren()
+			Align(Character:FindFirstChild("MeshPartAccessory").Handle, Clone:FindFirstChild("Left Arm"), Vector3.new(0,-0.5,0), Vector3.new(0,0,0))
 		else
 			ConsoleLog("Left Sniper Shoulder Not Found! (Bullet)")
 		end
@@ -463,7 +462,7 @@ table.insert(Loops, RunService.Heartbeat:Connect(function()
 						if Handle then
 							if Options.Type == "Bullet" and Part.Name ~= "Pal Hair" and Humanoid.RigType == Enum.HumanoidRigType.R6  then
 								Handle.CFrame = Clone:FindFirstChild(Handle.Parent.Name).Handle.CFrame
-							elseif Options.Type == "Bullet" or Options.Type == "Godmode" and Part.Name ~= "SniperShoulderL" and Humanoid.RigType == Enum.HumanoidRigType.R15 then
+							elseif Options.Type == "Bullet" or Options.Type == "Godmode" and Part.Name ~= "MeshPartAccessory" and Humanoid.RigType == Enum.HumanoidRigType.R15 then
 								Handle.CFrame = Clone:FindFirstChild(Handle.Parent.Name).Handle.CFrame
 							elseif Options.Type == "SemiBot" and Part.Name ~= Hat1.Parent.Name and Part.Name ~= Hat2.Parent.Name then
 								Handle.CFrame = Clone:FindFirstChild(Handle.Parent.Name).Handle.CFrame
@@ -532,8 +531,8 @@ table.insert(Loops, RunService.Heartbeat:Connect(function()
 			end
 
 			if Options.Type == "Bullet" or Options.Type == "Godmode" then
-					if Character:FindFirstChild("SniperShoulderL") then
-						Character:FindFirstChild("SniperShoulderL").Handle.CFrame = Clone:FindFirstChild("Left Arm").CFrame * CFrame.new(0,0.5,0)
+					if Character:FindFirstChild("MeshPartAccessory") then
+						Character:FindFirstChild("MeshPartAccessory").Handle.CFrame = Clone:FindFirstChild("Left Arm").CFrame * CFrame.new(0,0.5,0)
 					end
 
 					if Global.Disconnect == false then
@@ -573,7 +572,7 @@ if Humanoid.RigType == Enum.HumanoidRigType.R6 and Options.R6Method ~= "CFrame" 
 	end
 	if Options.Type == "SemiBot" then
 		task.spawn(function()
-		wait(0.55)
+		
 		Hat1:ClearAllChildren()
 		Hat2:ClearAllChildren()
 		Align(Hat1, Clone:FindFirstChild("Torso"), Vector3.new(0, -0.5, 0),Vector3.new(0,90,0))
