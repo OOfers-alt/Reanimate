@@ -80,9 +80,13 @@ local LHCF = CFrame.fromEulerAnglesXYZ(0, -1.6, 0)
 local maincolor = BrickColor.new("Instwitutional white")
 local cool = maybe
 game["Run Service"].Heartbeat:Connect(function()
-
+if game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].Humanoid.RigType == "R6" then
     game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
 game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+else
+ game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["LeftUpperArm"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["LeftUpperArm"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
+end
 
  pcall(function()
 	maybe.Handle.CFrame = clone.Handle.CFrame
