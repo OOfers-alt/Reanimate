@@ -28,7 +28,7 @@ local function getNetlessVelocity(realPartVelocity) --edit this if you have a be
     if (unit.Y > 0.9) or (unit.Y < -0.9) then
         return realPartVelocity * (25.1 / realPartVelocity.Y)
     end
-    realPartVelocity *= Vector3_101
+    realPartVelocity = Vector3_101
     local mag = realPartVelocity.Magnitude
     if (mag > 1) and (mag < 100) then
         realPartVelocity = unit * Vector3_101 * 100
@@ -273,7 +273,7 @@ if Options.Type == "Bullet" or Options.Type == "Godmode" or Options.Type == "Sem
 			BP = Instance.new("BodyPosition")
 			local Thrust = Instance.new("BodyThrust")
 			BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-			BP.P = 2249999872
+			BP.P = 500000
 			BP.D = 100
 			BP.Position = FlingPart.Position
 			BP.Parent = FlingPart
