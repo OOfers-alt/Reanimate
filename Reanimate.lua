@@ -101,7 +101,7 @@ if not Storage:FindFirstChild("PreloadData") then
 	AudioYes.SoundId = "rbxassetid://12221967"
 	AudioYes:Stop()
 
-	local R6FakeRig = game:GetObjects("rbxassetid://8440552086")[1]
+	local R6FakeRig = game:GetObjects("rbxassetid://10129034491")[1]
 	R6FakeRig.Name = "R6FakeRig"
 	R6FakeRig.Parent = Folder
 
