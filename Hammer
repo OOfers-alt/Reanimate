@@ -1,34 +1,37 @@
-
+local fon = false
 if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
 	Rig = "R15"
 
-spawn(function()
-	    
-		game["Run Service"].Heartbeat:Connect(function()
-		   
+	spawn(function()
+    
+        while fon == false do
+	task.wait()
 			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
-		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame * CFrame.new(0,0.2,0)
-					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0) * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
-			
+				game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame * CFrame.new(0,0.2,0)
+				game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0) * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
+
 			end
-		end)
+		
+		end
 	end)
 else
 
 	spawn(function()
-	    
-		game["Run Service"].Heartbeat:Connect(function()
-		   
+	
+    
+        while fon == false do
+	task.wait()
 			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
-			
-					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0) * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
-			
+
+				game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.MARTILLO.Handle.CFrame * CFrame.new(0,2.6,0) * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
+
+		
 			end
-		end)
+		end
 	end)
-	
+
 	Rig = "R6"
-	
+
 end
 
 
@@ -48,7 +51,7 @@ getgenv().Options = {
 	["Logging"] = false -- Enables logging (prints debug information in console)
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Reanimate.lua"))()
-wait()
+
 game.Players.LocalPlayer.Character["MARTILLO"].Handle.AccessoryWeld:Remove()
 
 -----------------------
@@ -129,13 +132,15 @@ else
 	av.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
 	av.Parent = game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"]
 end
-game["Run Service"].Heartbeat:Connect(function()
-
-if Rig == "R6" then
+spawn(function()
+    
+while fon == false do
+    task.wait()
+	if Rig == "R6" then
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
 	else
-game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame * CFrame.new(0,0.2,0)
+		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame * CFrame.new(0,0.2,0)
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].BodyThrust.Location =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].BodyPosition.Position =  game.Players.LocalPlayer.Character.MARTILLO.Handle.Position 
 	end
@@ -145,10 +150,10 @@ game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFr
 	end)
 
 
-
-
-
+end
 end)
+
+
 maybe.Handle.Transparency = 1
 
 
@@ -164,7 +169,7 @@ player2 = game:GetService("Players").LocalPlayer
 character2 = player2.Character
 
 item2 = character2["MARTILLO"].Handle
-item2:BreakJoints()
+--item2:BreakJoints()
 
 
 alignOr = Instance.new("AlignOrientation",character2["Head"])
@@ -192,6 +197,12 @@ a1.Position = Vector3.new(0, -1, -2.5)
 a1.Orientation = Vector3.new(2.50448e-06, -90, 90)
 maybe.Handle.Massless = true
 clone.Handle.Massless = true
+
+game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
+	print("cool")
+
+    fon = true
+end)
 -------------------------------------------------------
 --Start Good Stuff--
 -------------------------------------------------------
@@ -1191,7 +1202,7 @@ tecks2.Parent = naeeym2]]
 -------------------------------------------------------
 function Ban()
 	attack = true
-	
+
 	for i = 0, 2.6, 0.1 do
 		swait()
 		rootj.C0 = clerp(rootj.C0, RootCF * CF(0* Player_Size, 0* Player_Size, -0.1 + 0.1* Player_Size * Cos(sine / 20)) * angles(Rad(0), Rad(0), Rad(-60)), 0.2)
@@ -1202,7 +1213,7 @@ function Ban()
 		LW.C0 = clerp(LW.C0, CF(-1.5* Player_Size, 0.5 + 0.02 * Sin(sine / 20)* Player_Size, 0* Player_Size) * angles(Rad(15), Rad(-6), Rad(-25 - 4.5 * Sin(sine / 20))), 0.2)
 	end
 	Cso("147722910", tors, 10, 1)
-	
+
 	CameraEnshaking(2, 15)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -6, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
 	Effects.Wave.Create(BrickColor.new("Really black"), tors.CFrame * CF(0, -6, 0) * angles(math.rad(0), math.rad(math.random(0, 180)), math.rad(0)), 550.5, 100.5, 550.5, 200, 20, 200, 0.05)
@@ -1329,7 +1340,7 @@ end)
 mouse.Button1Down:connect(function(key)
 	if attack == false then
 		Ban()
-		
+
 	end
 end)
 
