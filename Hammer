@@ -51,7 +51,8 @@ getgenv().Options = {
 	["Logging"] = false -- Enables logging (prints debug information in console)
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Reanimate.lua"))()
-
+game.Players.LocalPlayer.Character.MARTILLO.Handle.Transparency = 0
+game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].MARTILLO.Handle.Transparency = 1
 game.Players.LocalPlayer.Character["MARTILLO"].Handle.AccessoryWeld:Remove()
 
 -----------------------
@@ -118,7 +119,7 @@ local cool = maybe
 local hitting = false
 local Players = game:GetService("Players")
 local found = false
-wait(0.5)
+
 if Rig == "R6" then
 	local av = Instance.new("BodyAngularVelocity")
 	av.AngularVelocity = Vector3.new(10000, 10000, 10000)
@@ -154,7 +155,7 @@ end
 end)
 
 
-maybe.Handle.Transparency = 1
+
 
 
 spawn(function()
