@@ -1,29 +1,30 @@
+local fon = false
 if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
 	Rig = "R15"
 
-spawn(function()
-	    
-		game["Run Service"].Heartbeat:Connect(function()
-		   
+	spawn(function()
+    
+        while fon == false do
+	task.wait()
 			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
 		game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFrame = game.Players.LocalPlayer.Character.Torso.CFrame * CFrame.new(0,0.2,0)
 					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"].CFrame = game.Players.LocalPlayer.Character.Pillow.Handle.CFrame  * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
 			
 			end
-		end)
+		end
 	end)
 else
 
 	spawn(function()
-	    
-		game["Run Service"].Heartbeat:Connect(function()
-		   
+    
+        while fon == false do
+	task.wait()
 			if 	game.Players.LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Name) ~= nil then
 			
 					game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Right Arm"].CFrame = game.Players.LocalPlayer.Character.Pillow.Handle.CFrame  * CFrame.Angles(math.random(1,90),math.random(1,90),math.random(1,90))
 			
 			end
-		end)
+		end
 	end)
 	
 	Rig = "R6"
@@ -47,6 +48,7 @@ getgenv().Options = {
 	["Logging"] = false -- Enables logging (prints debug information in console)
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Reanimate.lua"))()
+
 wait()
 loadstring(game:GetObjects("rbxassetid://5425999987")[1].Source)()
 game.Players.LocalPlayer.Character["Pillow"].Handle.AccessoryWeld:Remove()
@@ -95,8 +97,10 @@ else
 	av.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
 	av.Parent = game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["HumanoidRootPart"]
 end
-game["Run Service"].Heartbeat:Connect(function()
-
+	spawn(function()
+    
+        while fon == false do
+	task.wait()
 		maybe.Handle.Velocity = Vector3.new(0.1, 0, 0)
 	maybe.Handle.CFrame = clone.Handle.CFrame
 	maybe.Handle.CanCollide = false
@@ -112,10 +116,14 @@ game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].UpperTorso.CFr
 		maybe.Handle.CFrame = clone.Handle.CFrame
 		maybe.Handle.Velocity = Vector3.new(1, 0, 0)
 	end)
-
+end
 end)
 
+game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
+	print("cool")
 
+    fon = true
+end)
 game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name]["Pillow"].Handle.Transparency = 1
 alignOr = Instance.new("AlignOrientation",character2["Head"])
 alignPosition = Instance.new("AlignPosition",character2["Head"])
@@ -159,6 +167,7 @@ RootCF = CFrame.fromEulerAnglesXYZ(-1.57, 0, 3.14)
 RHCF = CFrame.fromEulerAnglesXYZ(0, 1.6, 0)
 LHCF = CFrame.fromEulerAnglesXYZ(0, -1.6, 0)
 maincolor = BrickColor.new("Institutional white")
+
 -------------------------------------------------------
 --Start Good Stuff--
 -------------------------------------------------------
