@@ -273,7 +273,7 @@ for Index, Accessory in pairs(CharacterG) do
 	if Accessory:IsA("Accessory") then
 		local NewAccessories = Accessory:Clone()
 		NewAccessories.Parent = FakeHats
-		NewAccessories.Handle.Transparency = 0
+		NewAccessories.Handle.Transparency = 1
 	end
 end
 
@@ -767,7 +767,7 @@ table.insert(Loops, Players.LocalPlayer.CharacterAdded:Connect(function()
 end))
 game.Players.LocalPlayer.Character.Head.Transparency = 0
 game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].Head.Transparency = 1
-game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].Head.face.Parent = game.Players.LocalPlayer.Character.Head
+game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].Head.face:Clone().Parent = game.Players.LocalPlayer.Character.Head
 game.Players.LocalPlayer.Character.Head.Color = game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].Head.Color 
 ConsoleLog("Everything is loaded!")
 
