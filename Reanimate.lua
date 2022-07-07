@@ -97,6 +97,10 @@ if not Storage:FindFirstChild("PreloadData") then
 	AudioYes.Name = "True"
 	AudioYes.SoundId = "rbxassetid://12221967"
 	AudioYes:Stop()
+		for count = 1, 5 do
+		rconsoleclear()
+		task.wait()
+		end
 
 	local R6FakeRig = game:GetObjects("rbxassetid://10129034491")[1]
 	R6FakeRig.Name = "R6FakeRig"
@@ -699,20 +703,15 @@ end))
 ConsoleLog("Everything is loaded!")
 
 
-
-if Options.LoadLibrary == true then
-	for count = 1, 5 do
+	for count = 1, 15 do
 rconsoleclear()
 task.wait()
 end
+
+if Options.LoadLibrary == true then
 
 	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/LoadLibrary.lua"))()
 end
 if Options.RigAnimations == true then
-	for count = 1, 5 do
-rconsoleclear()
-task.wait()
-end
-
 	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Animate.lua"))()
 end
