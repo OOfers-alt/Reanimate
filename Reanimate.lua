@@ -701,8 +701,18 @@ ConsoleLog("Everything is loaded!")
 
 
 if Options.LoadLibrary == true then
+	for count = 1, 5 do
+rconsoleclear()
+task.wait()
+end
+
 	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/LoadLibrary.lua"))()
 end
 if Options.RigAnimations == true then
+	for count = 1, 5 do
+rconsoleclear()
+task.wait()
+end
+
 	loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Animate.lua"))()
 end
