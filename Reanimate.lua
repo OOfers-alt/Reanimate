@@ -1,3 +1,4 @@
+rconsoleclear()
 local Global = (getgenv and getgenv()) or _G
 if not Global.Options then Global.Options = {
 		["Jitteryness"] = Vector3.new(30.5, 0, 0), -- Velocity
