@@ -50,6 +50,11 @@ getgenv().Options = {
 	["LoadLibrary"] = false, -- Loads LoadLibrary for scripts that still use it.
 	["Logging"] = false -- Enables logging (prints debug information in console)
 }
+spawn(function()
+ for count = 1, 10 do
+rconsoleclear()
+end
+end)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/OOfers-alt/Reanimate/main/Reanimate.lua"))()
 game.Players.LocalPlayer.Character.MARTILLO.Handle.Transparency = 0
 game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Name].MARTILLO.Handle.Transparency = 1
